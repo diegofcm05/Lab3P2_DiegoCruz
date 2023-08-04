@@ -46,6 +46,7 @@ public class Lab3P2_DiegoCruz {
                     break;
                 }
                 case 2: {
+                    AddMoto();
                     
                     break;
                 }
@@ -176,6 +177,64 @@ public class Lab3P2_DiegoCruz {
         System.out.println("El automovil se ha creado exitosamente!");
     }
     
+    public static void AddMoto(){
+        String placa, marca, modelo, tipo= "", tipocomb;
+        Color color;
+        Date anio = new Date();
+        int aniox, choosetipo;
+        double vel, peso, consumo;
+        System.out.println("A continuacion agregara una moto. Ingrese los siguientes datos:");
+        System.out.println("Ingrese placa:");
+        placa = sc_st.nextLine();
+        while (!VeriPlacaMoto(placa)){
+            System.out.println("Ingrese una placa valida. Las placas solo pueden tener 7 caracteres, y deben iniciar con H.");
+            placa = sc_st.nextLine();
+        }
+        System.out.println("Ingrese la marca del vehiculo:");
+        marca = sc_st.nextLine();
+        System.out.println("Ingrese el modelo");
+        modelo = sc_st.nextLine();
+        System.out.println("Escoga el tipo de carro");
+        System.out.println("1. Turismo");
+        System.out.println("2. Camioneta");
+        System.out.println("3. Otro");
+        choosetipo = sc.nextInt();
+        while (choosetipo<1 || choosetipo >3){
+            System.out.println("Ingrese un indice valido.");
+            choosetipo = sc.nextInt();
+        }
+        switch (choosetipo) {
+            case 1: {
+                tipo = "Turismo";
+                break;
+            }
+            case 2: {
+                tipo = "Camioneta";
+                break;
+            }
+            case 3: {
+                tipo = "Otro";
+                break;
+            }
+            
+        }
+        color = JColorChooser.showDialog(null, "Escoga el color del vehiculo", Color.red);
+        System.out.println("Ingrese el año del vehiculo: ");
+        aniox = sc.nextInt();
+        anio.setYear(aniox);
+        System.out.println("Ingrese la velocidad maxima de la motocicleta:");
+        vel = sc.nextDouble();
+        System.out.println("Ingrese el peso del vehiculo:");
+        peso = sc.nextDouble();
+        System.out.println("Ingrese el Consumo de Combustible del Vehiculo");
+        consumo = sc.nextDouble();
+        Motocicleta nmoto = new Motocicleta(vel, peso, consumo, placa, marca, modelo, tipo, color, anio);
+        registro.add(nmoto);
+        System.out.println("La motocicleta ha sido agregada exitosamente!!");
+        
+        
+    }
+    
     public static boolean VeriPlacaAutos(String placa){
         boolean bueno = false;
         boolean carac = true;
@@ -185,6 +244,46 @@ public class Lab3P2_DiegoCruz {
             char x = placa.charAt(i);
             System.out.println(x);
             if (i == 0 && x!= 'H'){
+                let1 = false;
+                System.out.println("let1");
+                break;
+            }
+            
+            if (i > 2 && (x<48 || x>57)){
+                carac = false;
+                System.out.println("caranum");
+                break;
+            }
+            
+            if (i < 3 && (x<65 || x>90)){
+                carac = false;
+                System.out.println("caraleT");
+                break;
+            }
+            
+        }
+        
+        if (placa.length()>7){
+            tam = false;
+        }
+        
+        if (carac && let1 && tam){
+            bueno = true;
+           
+        }
+        
+        return bueno;
+    }
+    
+    public static boolean VeriPlacaMoto(String placa){
+        boolean bueno = false;
+        boolean carac = true;
+        boolean let1 = true;
+        boolean tam = true;
+        for (int i = 0; i < placa.length(); i++) {
+            char x = placa.charAt(i);
+            System.out.println(x);
+            if (i == 0 && x!= 'B'){
                 let1 = false;
                 System.out.println("let1");
                 break;
