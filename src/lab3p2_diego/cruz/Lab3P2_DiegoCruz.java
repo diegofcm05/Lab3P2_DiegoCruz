@@ -51,7 +51,7 @@ public class Lab3P2_DiegoCruz {
                     break;
                 }
                 case 3: {
-                    
+                    AddBus();
                     break;
                 }
                 case 4: {
@@ -178,7 +178,7 @@ public class Lab3P2_DiegoCruz {
     }
     
     public static void AddMoto(){
-        String placa, marca, modelo, tipo= "", tipocomb;
+        String placa, marca, modelo, tipo= "";
         Color color;
         Date anio = new Date();
         int aniox, choosetipo;
@@ -233,6 +233,62 @@ public class Lab3P2_DiegoCruz {
         System.out.println("La motocicleta ha sido agregada exitosamente!!");
         
         
+    }
+    
+    public static void AddBus(){
+        String placa, marca, modelo, tipo = "";
+        Color color;
+        Date anio = new Date();
+        int capacidad, ejes, aniox, choosetipo;
+        double longitud;
+        System.out.println("A continuacion agregara una moto. Ingrese los siguientes datos:");
+        System.out.println("Ingrese placa:");
+        placa = sc_st.nextLine();
+        while (!VeriPlacaMoto(placa)){
+            System.out.println("Ingrese una placa valida. Las placas solo pueden tener 7 caracteres, y deben iniciar con H.");
+            placa = sc_st.nextLine();
+        }
+        System.out.println("Ingrese la marca del vehiculo:");
+        marca = sc_st.nextLine();
+        System.out.println("Ingrese el modelo");
+        modelo = sc_st.nextLine();
+        System.out.println("Escoga el tipo de carro");
+        System.out.println("1. Turismo");
+        System.out.println("2. Camioneta");
+        System.out.println("3. Otro");
+        choosetipo = sc.nextInt();
+        while (choosetipo<1 || choosetipo >3){
+            System.out.println("Ingrese un indice valido.");
+            choosetipo = sc.nextInt();
+        }
+        switch (choosetipo) {
+            case 1: {
+                tipo = "Turismo";
+                break;
+            }
+            case 2: {
+                tipo = "Camioneta";
+                break;
+            }
+            case 3: {
+                tipo = "Otro";
+                break;
+            }
+            
+        }
+        color = JColorChooser.showDialog(null, "Escoga el color del vehiculo", Color.red);
+        System.out.println("Ingrese el año del vehiculo: ");
+        aniox = sc.nextInt();
+        anio.setYear(aniox);
+        System.out.println("Ingrese la capacidad de pasajeros del bus:");
+        capacidad = sc.nextInt();
+        System.out.println("Ingrese los ejes del vehiculo:");
+        ejes = sc.nextInt();
+        System.out.println("Ingrese la longitud del vehiculo:");
+        longitud = sc.nextDouble();
+        Autobus nbus = new Autobus(capacidad, ejes, longitud, placa, marca, modelo, tipo, color, anio);
+        registro.add(nbus);
+                
     }
     
     public static boolean VeriPlacaAutos(String placa){
