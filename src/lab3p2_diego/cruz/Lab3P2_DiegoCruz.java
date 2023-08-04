@@ -115,6 +115,44 @@ public class Lab3P2_DiegoCruz {
                     break;
                 }
                 case 6:{
+                    if (registro.isEmpty()){
+                        System.out.println("No hay vehiculos para listar. Agregue un vehiculo primero.");
+                    }
+                    else{
+                        int total1 = 0, total2= 0, total3= 0;
+                        System.out.println("La lista completa de vehiculos es:");
+                        System.out.println("");
+                        System.out.println("Automoviles: ");
+                        for (Vehiculo vehiculo : registro) {
+                            if(vehiculo instanceof Automovil){
+                                System.out.println((registro.indexOf(vehiculo)+1)+"- "+vehiculo);
+                                total1++;
+                            }
+
+
+                        }
+                        System.out.println("El total de Automoviles es: "+total1);
+                        System.out.println("");
+                        System.out.println("Motocicletas: ");
+                        for (Vehiculo vehiculo : registro) {
+                            if(vehiculo instanceof Motocicleta){
+                                System.out.println((registro.indexOf(vehiculo)+1)+"- "+vehiculo);
+                                total2++;
+                            }
+
+                        }
+                        System.out.println("El total de Motocicletas es: "+total2);
+                        System.out.println("");
+                        System.out.println("Autobuses ");
+                        for (Vehiculo vehiculo : registro) {
+                            if(vehiculo instanceof Autobus){
+                                System.out.println((registro.indexOf(vehiculo)+1)+"- "+vehiculo);
+                                total3++;
+                            }
+
+                        }
+                        System.out.println("El total de Autobuses es: "+total3);
+                    }
                     break;
                 }
                 case 7:{
