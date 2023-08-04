@@ -66,20 +66,52 @@ public class Lab3P2_DiegoCruz {
                         }
                         System.out.println("Ingrese el indice del vehiculo que quiere modificar: ");
                         int ind = sc.nextInt();
-                        if (registro.get(ind-1) instanceof Automovil){
-                            ModAuto(ind-1);
-                        }
-                        else if (registro.get(ind-1) instanceof Motocicleta){
-                            ModMoto(ind-1);
+                        if (ind > 0 && ind<= registro.size()){
+                                                   
+                            if (registro.get(ind-1) instanceof Automovil){
+                                ModAuto(ind-1);
+                            }
+                            else if (registro.get(ind-1) instanceof Motocicleta){
+                                ModMoto(ind-1);
+                            }
+                            else{
+                                ModBus(ind-1);   
+                            }
                         }
                         else{
-                            ModBus(ind-1);   
+                            System.out.println("El indice que selecciono esta fuera de rango.");
                         }
                     }
                     
                     break;
                 }
                 case 5:{
+                    if (registro.isEmpty()){
+                        System.out.println("No hay vehiculos para eliminar. Agregue un vehiculo primero.");
+                    }
+                    else{
+                        System.out.println("Los vehiculos disponibles para eliminar son:");
+                        for (Vehiculo vehiculo : registro) {
+                            System.out.println((registro.indexOf(vehiculo)+1)+"- "+vehiculo);
+                            
+                        }
+                        System.out.println("Ingrese el indice del vehiculo que quiere eliminar: ");
+                        int ind = sc.nextInt();
+                        if (ind> 0 && ind<= registro.size()){
+                            System.out.println("Esta seguro de que quiere eliminar este vehiculo? Presione 1 para confirmar.");
+                            int dest = sc.nextInt();
+                            if (dest ==1){
+                                registro.remove(ind-1);
+                                System.out.println("El vehiculo se ha eliminado exitosamente.");
+                            }
+                            else{
+                                System.out.println("No se ha eliminado el vehiculo. Regresara al menu principal.");
+                            }
+                        }
+                        else{
+                            System.out.println("El indice que selecciono esta fuera de rango. Regresara al menu principal.");
+                        }
+                    }
                     break;
                 }
                 case 6:{
@@ -98,9 +130,10 @@ public class Lab3P2_DiegoCruz {
                     System.out.println("Opcion Invalida. Ingrese una opcion valida.");
                     break;
                 }
-                
+                                
             }
-            
+            System.out.println("");
+
         }
     }
     
