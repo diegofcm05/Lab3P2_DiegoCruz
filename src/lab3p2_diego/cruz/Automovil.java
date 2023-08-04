@@ -59,6 +59,11 @@ public class Automovil extends Vehiculo{
     public void setAsientos(int asientos) {
         this.asientos = asientos;
     }
+
+    @Override
+    public String toString() {
+        return "Automovil{" + "tipcomb=" + tipcomb + ", tipotransm=" + tipotransm + ", puertas=" + puertas + ", asientos=" + asientos + '}';
+    }
     
     
     

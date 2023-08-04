@@ -49,6 +49,13 @@ public class Motocicleta extends Vehiculo{
     public void setConsumo(double consumo) {
         this.consumo = consumo;
     }
+
+    @Override
+    public String toString() {
+        return "Motocicleta{" + "vel=" + vel + ", peso=" + peso + ", consumo=" + consumo + '}';
+    }
+    
+    
     
     
     
