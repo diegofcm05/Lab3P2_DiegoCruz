@@ -125,8 +125,9 @@ public class Lab3P2_DiegoCruz {
                         System.out.println("Automoviles: ");
                         for (Vehiculo vehiculo : registro) {
                             if(vehiculo instanceof Automovil){
-                                System.out.println((registro.indexOf(vehiculo)+1)+"- "+vehiculo);
+                                
                                 total1++;
+                                System.out.println(total1+"- "+vehiculo);
                             }
 
 
@@ -136,8 +137,9 @@ public class Lab3P2_DiegoCruz {
                         System.out.println("Motocicletas: ");
                         for (Vehiculo vehiculo : registro) {
                             if(vehiculo instanceof Motocicleta){
-                                System.out.println((registro.indexOf(vehiculo)+1)+"- "+vehiculo);
+                                
                                 total2++;
+                                System.out.println(total2+"- "+vehiculo);
                             }
 
                         }
@@ -146,8 +148,9 @@ public class Lab3P2_DiegoCruz {
                         System.out.println("Autobuses ");
                         for (Vehiculo vehiculo : registro) {
                             if(vehiculo instanceof Autobus){
-                                System.out.println((registro.indexOf(vehiculo)+1)+"- "+vehiculo);
+                                
                                 total3++;
+                                System.out.println(total3+"- "+vehiculo);
                             }
 
                         }
@@ -156,6 +159,46 @@ public class Lab3P2_DiegoCruz {
                     break;
                 }
                 case 7:{
+                    if (registro.isEmpty()){
+                        System.out.println("No se peude generar una boleta para un vehiculo ya que no hay vehiculos. Agregue un vehiculo primero.");
+                    }
+                    else{
+                        double subtotal = 525;
+                        System.out.println("Los vehiculos disponibles para generar una boleta son:");
+                        for (Vehiculo vehiculo : registro) {
+                            System.out.println((registro.indexOf(vehiculo)+1)+"- "+vehiculo);
+                            
+                        }
+                        System.out.println("Ingrese el indice del vehiculo del cual quiere generar una boleta: ");
+                        int ind = sc.nextInt();
+                        if (ind> 0 && ind<= registro.size()){
+                            System.out.println("Boleta de Revision Vehicular: ");
+                            System.out.println("Datos del Vehiculo: ");
+                            System.out.println("Vehiculo: "+registro.get(ind-1).getClass().getSimpleName());
+                            System.out.println("Placa: "+registro.get(ind-1).getPlaca());
+                            System.out.println("Marca: "+registro.get(ind-1).getMarca());
+                            System.out.println("Modelo: "+registro.get(ind-1).getModelo());
+                            System.out.println("Tipo de Vehiculo: "+registro.get(ind-1).getTipo());
+                            System.out.println("Color: "+registro.get(ind-1).getColor());
+                            System.out.println("Año "+registro.get(ind-1).getAnio().getYear());
+                            if(registro.get(ind-1) instanceof Automovil){
+                                subtotal+=1200;
+                            }
+                            if(registro.get(ind-1) instanceof Motocicleta){
+                                subtotal+=200;
+                            }
+                            if(registro.get(ind-1) instanceof Autobus){
+                                subtotal+=1000;
+                            }
+                            System.out.println("");
+                            System.out.println("El Total a Pagar de la Tasa Vehicular de este vehiculo es: "+subtotal);
+                        }
+                        else{
+                            System.out.println("El indice que selecciono esta fuera de rango. Regresara al menu principal.");
+                        }
+                        
+                        
+                    }
                     break;
                     
                 }

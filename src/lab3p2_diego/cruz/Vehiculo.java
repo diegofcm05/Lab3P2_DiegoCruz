@@ -78,6 +78,11 @@ public class Vehiculo {
     public void setAnio(Date anio) {
         this.anio = anio;
     }
+
+    @Override
+    public String toString() {
+        return "Vehiculo{" + "placa=" + placa + ", marca=" + marca + ", modelo=" + modelo + ", tipo=" + tipo + ", color=" + color + ", anio=" + anio + '}';
+    }
     
     
     
