@@ -256,22 +256,22 @@ public class Lab3P2_DiegoCruz {
     }
   
     public static void AddAuto(){
-        String placa, marca, modelo, tipo= "", tipocomb, tipotransm;
-        int puertas, asientos, choosetipo, aniox;
+        String placa, marca, modelo, tipo= "", tipocomb="", tipotransm;
+        int puertas, asientos, choosetipo, aniox, choosecm;
         Color color;
         Date anio = new Date();
         System.out.println("A continuacion agregara un auto. Ingrese los siguientes datos:");
         System.out.println("Ingrese placa:");
         placa = sc_st.nextLine();
-        while (!VeriPlacaAutos(placa)){
-            System.out.println("Ingrese una placa valida. Las placas solo pueden tener 7 caracteres, y deben iniciar con H.");
+        while (!VeriPlacaAutos(placa) || !PlacaDif(placa)){
+            System.out.println("Ingrese una placa valida. Las placas solo pueden tener 7 caracteres, y deben iniciar con H. Ademas, la placa no puede ser igual.");
             placa = sc_st.nextLine();
         }
         System.out.println("Ingrese la marca del vehiculo:");
         marca = sc_st.nextLine();
         System.out.println("Ingrese el modelo");
         modelo = sc_st.nextLine();
-        System.out.println("Escoga el tipo de carro");
+        System.out.println("Escoja el tipo de carro");
         System.out.println("1. Turismo");
         System.out.println("2. Camioneta");
         System.out.println("3. Otro");
@@ -298,15 +298,48 @@ public class Lab3P2_DiegoCruz {
         color = JColorChooser.showDialog(null, "Escoga el color del vehiculo", Color.red);
         System.out.println("Ingrese el año del vehiculo: ");
         aniox = sc.nextInt();
+        while (aniox <1){
+            System.out.println("Ingrese un numero valido.");
+            aniox = sc.nextInt();
+        }
         anio.setYear(aniox);
-        System.out.println("Ingrese el tipo de Combustible del auto:");
-        tipocomb = sc_st.nextLine();
-        System.out.println("Ingrese el tipo de Transmision:");
+        System.out.println("Escoja tipo de Combustible del auto:");
+        System.out.println("1. Super");
+        System.out.println("2. Regular");
+        System.out.println("3. Diesel");
+        choosecm = sc.nextInt();
+        while (choosecm<1 || choosecm >3){
+            System.out.println("Ingrese un indice valido.");
+            choosecm = sc.nextInt();
+        }
+        switch (choosetipo) {
+            case 1: {
+                tipocomb = "Super";
+                break;
+            }
+            case 2: {
+                tipocomb = "Regular";
+                break;
+            }
+            case 3: {
+                tipocomb = "Diesel";
+                break;
+            }
+        }
+        System.out.println("Ingrese el tipo de Transmision (Manual/Automatica):");
         tipotransm = sc_st.nextLine();
         System.out.println("Ingrese el numero de puertas del auto:");
         puertas = sc.nextInt();
+        while (puertas<1){
+            System.out.println("Amigo, no se puede entrar a su carro! Ingrese un numero valido.");
+            puertas = sc.nextInt();
+        }
         System.out.println("Ingrese el numero de asientos del auto:");
         asientos = sc.nextInt();
+        while (asientos<1){
+            System.out.println("Ingrese un numero valido (mayor a 0).");
+            asientos = sc.nextInt();
+        }
         Automovil nauto = new Automovil(tipocomb, tipotransm, puertas, asientos, placa, marca, modelo, tipo, color, anio);
         registro.add(nauto);
         System.out.println("El automovil se ha creado exitosamente!");
@@ -321,17 +354,17 @@ public class Lab3P2_DiegoCruz {
         System.out.println("A continuacion agregara una moto. Ingrese los siguientes datos:");
         System.out.println("Ingrese placa:");
         placa = sc_st.nextLine();
-        while (!VeriPlacaMoto(placa)){
-            System.out.println("Ingrese una placa valida. Las placas solo pueden tener 7 caracteres, y deben iniciar con H.");
+        while (!VeriPlacaMoto(placa)|| !PlacaDif(placa)){
+            System.out.println("Ingrese una placa valida. Las placas solo pueden tener 7 caracteres, y deben iniciar con B. Ademas, la placa no puede ser igual.");
             placa = sc_st.nextLine();
         }
         System.out.println("Ingrese la marca del vehiculo:");
         marca = sc_st.nextLine();
         System.out.println("Ingrese el modelo");
         modelo = sc_st.nextLine();
-        System.out.println("Escoga el tipo de moto");
+        System.out.println("Escoja el tipo de moto");
         System.out.println("1. Normal");
-        System.out.println("2. Cuatrimoto");
+        System.out.println("2. Custom");
         System.out.println("3. Otro");
         choosetipo = sc.nextInt();
         while (choosetipo<1 || choosetipo >3){
@@ -344,7 +377,7 @@ public class Lab3P2_DiegoCruz {
                 break;
             }
             case 2: {
-                tipo = "Cuatrimoto";
+                tipo = "Custom";
                 break;
             }
             case 3: {
@@ -356,13 +389,29 @@ public class Lab3P2_DiegoCruz {
         color = JColorChooser.showDialog(null, "Escoga el color del vehiculo", Color.red);
         System.out.println("Ingrese el año del vehiculo: ");
         aniox = sc.nextInt();
+        while (aniox <1){
+            System.out.println("Ingrese un numero valido.");
+            aniox = sc.nextInt();
+        }
         anio.setYear(aniox);
-        System.out.println("Ingrese la velocidad maxima de la motocicleta:");
+        System.out.println("Ingrese la velocidad maxima de la motocicleta (Km/h):");
         vel = sc.nextDouble();
-        System.out.println("Ingrese el peso del vehiculo:");
+        while (vel<1){
+            System.out.println("Ingrese un numero valido (1 en adelante.)");
+            vel = sc.nextDouble();
+        }
+        System.out.println("Ingrese el peso del vehiculo: (en kg)");
         peso = sc.nextDouble();
-        System.out.println("Ingrese el Consumo de Combustible del Vehiculo");
+        while (peso<1){
+            System.out.println("Ingrese un numero valido (1 en adelante.)");
+            peso = sc.nextDouble();
+        }
+        System.out.println("Ingrese el Consumo de Combustible del Vehiculo (en L/Km)");
         consumo = sc.nextDouble();
+        while (consumo<1){
+            System.out.println("Ingrese un numero valido (1 en adelante.)");
+            consumo = sc.nextDouble();
+        }
         Motocicleta nmoto = new Motocicleta(vel, peso, consumo, placa, marca, modelo, tipo, color, anio);
         registro.add(nmoto);
         System.out.println("La motocicleta ha sido agregada exitosamente!!");
@@ -379,15 +428,15 @@ public class Lab3P2_DiegoCruz {
         System.out.println("A continuacion agregara un autobus. Ingrese los siguientes datos:");
         System.out.println("Ingrese placa:");
         placa = sc_st.nextLine();
-        while (!VeriPlacaAutos(placa)){
-            System.out.println("Ingrese una placa valida. Las placas solo pueden tener 7 caracteres, y deben iniciar con H.");
+        while (!VeriPlacaAutos(placa)|| !PlacaDif(placa)){
+            System.out.println("Ingrese una placa valida. Las placas solo pueden tener 7 caracteres, y deben iniciar con H. Ademas, la placa no puede ser igual.");
             placa = sc_st.nextLine();
         }
         System.out.println("Ingrese la marca del vehiculo:");
         marca = sc_st.nextLine();
         System.out.println("Ingrese el modelo");
         modelo = sc_st.nextLine();
-        System.out.println("Escoga el tipo de autobus");
+        System.out.println("Escoja el tipo de autobus");
         System.out.println("1. Rapidito");
         System.out.println("2. Bus de Ruta");
         System.out.println("3. Otro");
@@ -414,9 +463,17 @@ public class Lab3P2_DiegoCruz {
         color = JColorChooser.showDialog(null, "Escoga el color del vehiculo", Color.red);
         System.out.println("Ingrese el año del vehiculo: ");
         aniox = sc.nextInt();
+        while (aniox <1){
+            System.out.println("Ingrese un numero valido.");
+            aniox = sc.nextInt();
+        }
         anio.setYear(aniox);
         System.out.println("Ingrese la capacidad de pasajeros del bus:");
         capacidad = sc.nextInt();
+        while (capacidad <1){
+            System.out.println("Ingrese un numero valido.");
+            capacidad = sc.nextInt();
+        }
         System.out.println("Ingrese los ejes del vehiculo:");
         ejes = sc.nextInt();
         System.out.println("Ingrese la longitud del vehiculo:");
@@ -435,15 +492,15 @@ public class Lab3P2_DiegoCruz {
         System.out.println("A continuacion modificara un auto. Ingrese los siguientes datos:");
         System.out.println("Ingrese placa:");
         placa = sc_st.nextLine();
-        while (!VeriPlacaAutos(placa)){
-            System.out.println("Ingrese una placa valida. Las placas solo pueden tener 7 caracteres, y deben iniciar con H.");
+        while (!VeriPlacaAutos(placa)|| !PlacaDif(placa)){
+            System.out.println("Ingrese una placa valida. Las placas solo pueden tener 7 caracteres, y deben iniciar con H. Ademas, la placa no puede ser igual.");
             placa = sc_st.nextLine();
         }
         System.out.println("Ingrese la marca del vehiculo:");
         marca = sc_st.nextLine();
         System.out.println("Ingrese el modelo");
         modelo = sc_st.nextLine();
-        System.out.println("Escoga el tipo de carro");
+        System.out.println("Escoja el tipo de carro");
         System.out.println("1. Turismo");
         System.out.println("2. Camioneta");
         System.out.println("3. Otro");
@@ -470,6 +527,10 @@ public class Lab3P2_DiegoCruz {
         color = JColorChooser.showDialog(null, "Escoga el color del vehiculo", Color.red);
         System.out.println("Ingrese el año del vehiculo: ");
         aniox = sc.nextInt();
+        while (aniox <1){
+            System.out.println("Ingrese un numero valido.");
+            aniox = sc.nextInt();
+        }
         anio.setYear(aniox);
         System.out.println("Ingrese el tipo de Combustible del auto:");
         tipocomb = sc_st.nextLine();
@@ -477,8 +538,16 @@ public class Lab3P2_DiegoCruz {
         tipotransm = sc_st.nextLine();
         System.out.println("Ingrese el numero de puertas del auto:");
         puertas = sc.nextInt();
+        while (puertas<1){
+            System.out.println("Amigo, no se puede entrar a su carro! Ingrese un numero valido.");
+            puertas = sc.nextInt();
+        }
         System.out.println("Ingrese el numero de asientos del auto:");
         asientos = sc.nextInt();
+        while (asientos<1){
+            System.out.println("Ingrese un numero valido (mayor a 0).");
+            asientos = sc.nextInt();
+        }
         Automovil nauto = new Automovil(tipocomb, tipotransm, puertas, asientos, placa, marca, modelo, tipo, color, anio);
         registro.set(index, nauto);
         System.out.println("El automovil se ha modificado exitosamente!");
@@ -493,15 +562,15 @@ public class Lab3P2_DiegoCruz {
         System.out.println("A continuacion modificara una moto. Ingrese los siguientes datos:");
         System.out.println("Ingrese placa:");
         placa = sc_st.nextLine();
-        while (!VeriPlacaMoto(placa)){
-            System.out.println("Ingrese una placa valida. Las placas solo pueden tener 7 caracteres, y deben iniciar con H.");
+        while (!VeriPlacaMoto(placa)|| !PlacaDif(placa)){
+            System.out.println("Ingrese una placa valida. Las placas solo pueden tener 7 caracteres, y deben iniciar con H. Ademas, la placa no puede ser igual.");
             placa = sc_st.nextLine();
         }
         System.out.println("Ingrese la marca del vehiculo:");
         marca = sc_st.nextLine();
         System.out.println("Ingrese el modelo");
         modelo = sc_st.nextLine();
-        System.out.println("Escoga el tipo de moto");
+        System.out.println("Escoja el tipo de moto");
         System.out.println("1. Normal");
         System.out.println("2. Cuatrimoto");
         System.out.println("3. Otro");
@@ -528,6 +597,10 @@ public class Lab3P2_DiegoCruz {
         color = JColorChooser.showDialog(null, "Escoga el color del vehiculo", Color.red);
         System.out.println("Ingrese el año del vehiculo: ");
         aniox = sc.nextInt();
+        while (aniox <1){
+            System.out.println("Ingrese un numero valido.");
+            aniox = sc.nextInt();
+        }
         anio.setYear(aniox);
         System.out.println("Ingrese la velocidad maxima de la motocicleta:");
         vel = sc.nextDouble();
@@ -549,8 +622,8 @@ public class Lab3P2_DiegoCruz {
         System.out.println("A continuacion modificara un autobus. Ingrese los siguientes datos:");
         System.out.println("Ingrese placa:");
         placa = sc_st.nextLine();
-        while (!VeriPlacaAutos(placa)){
-            System.out.println("Ingrese una placa valida. Las placas solo pueden tener 7 caracteres, y deben iniciar con H.");
+        while (!VeriPlacaAutos(placa)|| !PlacaDif(placa)){
+            System.out.println("Ingrese una placa valida. Las placas solo pueden tener 7 caracteres, y deben iniciar con H. Ademas, la placa no puede ser igual.");
             placa = sc_st.nextLine();
         }
         System.out.println("Ingrese la marca del vehiculo:");
@@ -584,9 +657,17 @@ public class Lab3P2_DiegoCruz {
         color = JColorChooser.showDialog(null, "Escoga el color del vehiculo", Color.red);
         System.out.println("Ingrese el año del vehiculo: ");
         aniox = sc.nextInt();
+        while (aniox <1){
+            System.out.println("Ingrese un numero valido.");
+            aniox = sc.nextInt();
+        }
         anio.setYear(aniox);
         System.out.println("Ingrese la capacidad de pasajeros del bus:");
         capacidad = sc.nextInt();
+        while (capacidad <1){
+            System.out.println("Ingrese un numero valido.");
+            capacidad = sc.nextInt();
+        }
         System.out.println("Ingrese los ejes del vehiculo:");
         ejes = sc.nextInt();
         System.out.println("Ingrese la longitud del vehiculo:");
@@ -596,6 +677,21 @@ public class Lab3P2_DiegoCruz {
         System.out.println("El autobus ha sido modificado exitosamente!");
     }
     
+    public static boolean PlacaDif(String placa){
+        boolean dif = true;
+        if (registro.isEmpty()){
+            System.out.print("");
+        }
+        else{
+            for (Vehiculo vehiculo : registro) {
+                if (vehiculo.getPlaca().equals(placa)){
+                    dif = false;
+                }
+            }
+        }
+        return dif;
+    }
+    
     public static boolean VeriPlacaAutos(String placa){
         boolean bueno = false;
         boolean carac = true;
@@ -603,22 +699,22 @@ public class Lab3P2_DiegoCruz {
         boolean tam = true;
         for (int i = 0; i < placa.length(); i++) {
             char x = placa.charAt(i);
-            System.out.println(x);
+            
             if (i == 0 && x!= 'H'){
                 let1 = false;
-                System.out.println("let1");
+               
                 break;
             }
             
             if (i > 2 && (x<48 || x>57)){
                 carac = false;
-                System.out.println("caranum");
+              
                 break;
             }
             
             if (i < 3 && (x<65 || x>90)){
                 carac = false;
-                System.out.println("caraleT");
+         
                 break;
             }
             
@@ -644,22 +740,22 @@ public class Lab3P2_DiegoCruz {
         boolean tam = true;
         for (int i = 0; i < placa.length(); i++) {
             char x = placa.charAt(i);
-            System.out.println(x);
+            
             if (i == 0 && x!= 'B'){
                 let1 = false;
-                System.out.println("let1");
+                
                 break;
             }
             
             if (i > 2 && (x<48 || x>57)){
                 carac = false;
-                System.out.println("caranum");
+                
                 break;
             }
             
             if (i < 3 && (x<65 || x>90)){
                 carac = false;
-                System.out.println("caraleT");
+                
                 break;
             }
             
